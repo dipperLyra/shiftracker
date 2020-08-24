@@ -25,7 +25,6 @@ public class ActivityCRUDServicesImpl implements ActivityCRUDServices{
                 request.getRecommended()
         );
         return repository.save(activity);
-
     }
 
     public ActivityResponse showActivity(Long id) {

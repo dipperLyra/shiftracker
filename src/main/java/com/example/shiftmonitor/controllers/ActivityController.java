@@ -5,12 +5,11 @@ import com.example.shiftmonitor.dto.ActivityResponse;
 import com.example.shiftmonitor.persistence.entities.Activity;
 import com.example.shiftmonitor.services.ActivityCRUDServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(path = "/api/v1")
 public class ActivityController {
 
@@ -27,7 +26,7 @@ public class ActivityController {
         return services.showActivity(id);
     }
 
-    @GetMapping("/activity/")
+    @GetMapping("/activity")
     public List<ActivityResponse> listActivity() {
         return services.listActivities();
     }
@@ -35,6 +34,11 @@ public class ActivityController {
     @PutMapping("/activity/{id}")
     public String updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request) {
         return services.updateActivity(id, request);
+    }
+
+    @DeleteMapping("/activity/{id}")
+    public String removeActivity(@PathVariable Long id) {
+        return services.deleteActivity(id);
     }
 
 }

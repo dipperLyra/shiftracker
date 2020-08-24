@@ -24,10 +24,10 @@ public class Activity {
     private String recommended;
 
     public Activity(String description, String status, String actionTaken, String recommended) {
-        description = description;
-        status = status;
-        actionTaken = actionTaken;
-        recommended = recommended;
+        this.description = description;
+        this.status = status;
+        this.actionTaken = actionTaken;
+        this.recommended = recommended;
     }
 
 }

@@ -15,16 +15,16 @@ public class ActivityResponse {
     private String recommended;
 
     public ActivityResponse(Long id, String description, String status, String actionTaken, String recommended) {
-        id = id;
-        description = description;
-        status = status;
-        actionTaken = actionTaken;
-        recommended = recommended;
+        this.id = id;
+        this.description = description;
+        this.status = status;
+        this.actionTaken = actionTaken;
+        this.recommended = recommended;
     }
     public ActivityResponse(String description, String status, String actionTaken, String recommended) {
-        description = description;
-        status = status;
-        actionTaken = actionTaken;
-        recommended = recommended;
+        this.description = description;
+        this.status = status;
+        this.actionTaken = actionTaken;
+        this.recommended = recommended;
     }
 }
