@@ -1,4 +1,4 @@
-# shiftracker
+# Shiftracker
 For workers that pull shifts. It could be helpful to track the work done during your shift and also have your roster in  a calendar
 
 
@@ -25,3 +25,28 @@ Change the H2 <username> and <password>
 - Run the Spring application with maven
 
     `mvn exec:java -Dexec.mainClass=com.example.shiftmonitor.ShiftmonitorApplication`
+
+### Api doc
+####Create Activity
+- sample request: 
+```
+curl -X POST -H "Content-Type: application/json" -d '{"actionTaken": "Emergency", "status": "Not okay", "recommended": "Air the lab", "description": "The ammonia is heating beyond the normal temperature"}' http://localhost:8050/api/v1/activity
+```
+
+- sample responses:
+1. "successful" 
+2. "Please fill mandatory fields"
+3. "unsuccessful"
+
+
+- Mandatory fields
+1. actionTaken //acceptable values: ["emergency", "customer call", "observation made", "job done"]
+2. status //acceptable values: ["okay", "not okay"]
+3. description
+-Optoinal field
+1. recommended
+
+####Show Activity
+- sample request:
+
+`curl http://localhost:8050/api/v1/activity/3`
