@@ -27,7 +27,7 @@ Change the H2 <username> and <password>
     `mvn exec:java -Dexec.mainClass=com.example.shiftmonitor.ShiftmonitorApplication`
 
 ### Api doc
-####Create Activity
+#### Create Activity
 - sample request: 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"actionTaken": "Emergency", "status": "Not okay", "recommended": "Air the lab", "description": "The ammonia is heating beyond the normal temperature"}' http://localhost:8050/api/v1/activity
@@ -46,7 +46,19 @@ curl -X POST -H "Content-Type: application/json" -d '{"actionTaken": "Emergency"
 -Optoinal field
 1. recommended
 
-####Show Activity
+#### Show Activity
 - sample request:
 
 `curl http://localhost:8050/api/v1/activity/3`
+
+- sample response: 
+
+```
+{
+    "id":3,
+    "description":"The ammonia was overheating",
+    "status":"Not okay",
+    "actionTaken":"Customer Call",
+    "recommended":"Air the lab"
+}
+```
