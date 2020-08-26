@@ -2,7 +2,6 @@ package com.example.shiftmonitor.controllers;
 
 import com.example.shiftmonitor.dto.ActivityRequest;
 import com.example.shiftmonitor.dto.ActivityResponse;
-import com.example.shiftmonitor.persistence.entities.Activity;
 import com.example.shiftmonitor.services.ActivityCRUDServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +14,22 @@ public class ActivityController {
 
     @Autowired
     ActivityCRUDServices services;
+    @Autowired
+    Helper helper;
 
     @PostMapping("/activity")
-    public Activity recordActivity(@RequestBody ActivityRequest request) {
-         return services.newActivity(request);
+    public String recordActivity(@RequestBody ActivityRequest request) {
+        boolean checkFields = helper.checkMandatoryFields(request);
+        if (!helper.checkMandatoryFields(request)) {
+            return "Please fill mandatory fields";
+        }
+        boolean action = helper.checkActionTaken(request.getActionTaken());
+        boolean status = helper.checkActivityStatus(request.getStatus());
+        if (status && action) {
+            services.newActivity(request);
+            return "successful";
+        }
+        return "unsuccessful";
     }
 
     @GetMapping("/activity/{id}")
@@ -33,11 +44,22 @@ public class ActivityController {
 
     @PutMapping("/activity/{id}")
     public String updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request) {
-        return services.updateActivity(id, request);
+        boolean checkFields = helper.checkMandatoryFields(request);
+        if (checkFields) {
+            return "Please fill mandatory fields";
+        }
+        boolean action = helper.checkActionTaken(request.getActionTaken());
+        boolean status = helper.checkActivityStatus(request.getStatus());
+
+        if (status && action) {
+            return services.updateActivity(id, request);
+        }
+        return "unsuccessful";
     }
 
     @DeleteMapping("/activity/{id}")
     public String removeActivity(@PathVariable Long id) {
+
         return services.deleteActivity(id);
     }
 
