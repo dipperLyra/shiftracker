@@ -19,7 +19,6 @@ public class ActivityController {
 
     @PostMapping("/activity")
     public String recordActivity(@RequestBody ActivityRequest request) {
-        boolean checkFields = helper.checkMandatoryFields(request);
         if (!helper.checkMandatoryFields(request)) {
             return "Please fill mandatory fields";
         }
@@ -44,8 +43,7 @@ public class ActivityController {
 
     @PutMapping("/activity/{id}")
     public String updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request) {
-        boolean checkFields = helper.checkMandatoryFields(request);
-        if (checkFields) {
+        if (!helper.checkMandatoryFields(request)) {
             return "Please fill mandatory fields";
         }
         boolean action = helper.checkActionTaken(request.getActionTaken());

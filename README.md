@@ -53,7 +53,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"actionTaken": "Emergency"
 
 - sample response: 
 
-```
+```json
 {
     "id":3,
     "description":"The ammonia was overheating",
@@ -62,3 +62,56 @@ curl -X POST -H "Content-Type: application/json" -d '{"actionTaken": "Emergency"
     "recommended":"Air the lab"
 }
 ```
+
+#### List Activity
+- sample request:
+
+`curl http://localhost:8050/api/v1/activity/`
+
+- sample response 
+
+```json
+[
+    {
+      "id":1,
+      "description":"The ammonia is heating beyond the normal temperature",
+      "status":"Not okay",
+      "actionTaken":"Emergency",
+      "recommended":"Air the lab"
+    },
+    {
+      "id":2,
+      "description":"The ammonia is heating beyond the normal temperature",
+      "status":"Not okay",
+      "actionTaken":"Emergency",
+      "recommended":"Air the lab"
+    },
+    {
+      "id":3,
+      "description":"The ammonia is heating beyond the normal temperature",
+      "status":"Not okay",
+      "actionTaken":"Emergency",
+      "recommended":"Air the lab"
+    }
+]
+```
+
+#### Update Activity
+- sample request
+
+```
+curl -X PUT -H "Content-Type: application/json" -d '{"actionTaken": "Customer call", "status": "Not okay", "recommended": "Air the lab", "description": "The ammonia is heating beyond the normal temperature"}' http://localhost:8050/api/v1/activity/1
+```
+
+- sample response
+
+`Updated record`
+
+#### Delete Activity
+- sample request 
+
+`curl -X DELETE -H "Content-Type: application/json" http://localhost:8050/api/v1/activity/1`
+
+- sample response
+
+`Record deleted... bye bye forever ooh!!`
